@@ -36,40 +36,24 @@ public class IndexController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/imageviewer", method = RequestMethod.GET)
-	public String imageviewer(HttpServletRequest httpServletRequest, Locale locale) {
-		return "imageviewer";
-	}
-
 	@RequestMapping(value = "/imagefolder", method = RequestMethod.GET)
 	public String imagefolder(HttpServletRequest httpServletRequest, Locale locale) {
+		// 현재 이미지 폴더들을 내려보낸다.
 		return "imagefolder";
 	}
 
-	@RequestMapping(value = "/pdfviewer", method = RequestMethod.GET)
-	public String pdfviewer(HttpServletRequest httpServletRequest, Locale locale) {
-		return "pdfviewer";
-	}
-
-	@GetMapping(value = "/pdf/**", produces = MediaType.APPLICATION_PDF_VALUE)
-	public @ResponseBody byte[] getPdfFile(HttpServletRequest httpServletRequest) throws IOException {
-		String filePathName = (String) httpServletRequest
-				.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-		StringBuilder resourcePath = new StringBuilder();
-		resourcePath.append(basePath).append(filePathName);
-		InputStream inputStream = getClass().getResourceAsStream(resourcePath.toString());
-		return IOUtils.toByteArray(inputStream);
+	@RequestMapping(value = "/imageviewer", method = RequestMethod.GET)
+	public String imageviewer(HttpServletRequest httpServletRequest, Locale locale) {
+		// 현재 이미지 폴더값을 가져와서 내부에 있는 이미지 파일명을 전체다 내려보내야함
+		return "imageviewer";
 	}
 
 	@GetMapping(value = "/image/**")
 	public @ResponseBody ResponseEntity<byte[]> getImageFile(HttpServletRequest httpServletRequest) throws IOException {
 		String filePathName = (String) httpServletRequest
 				.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-		logger.info("basePath : " + basePath);
-		logger.info("filePathName : " + filePathName);
 		StringBuilder resourcePath = new StringBuilder();
 		resourcePath.append(basePath).append(filePathName);
-		logger.info("resourcePath : " + resourcePath.toString());
 		String fileFormat = filePathName.split("\\.")[filePathName.split("\\.").length - 1];
 		HttpHeaders header = new HttpHeaders();
 		switch (fileFormat.toLowerCase()) {
@@ -86,6 +70,32 @@ public class IndexController {
 		default:
 			return new ResponseEntity<byte[]>(HttpStatus.NOT_ACCEPTABLE);
 		}
+
+		return new ResponseEntity<byte[]>(IOUtils.toByteArray(new FileInputStream(new File(resourcePath.toString()))),
+				header, HttpStatus.CREATED);
+	}
+
+	@RequestMapping(value = "/pdffolder", method = RequestMethod.GET)
+	public String pdffolder(HttpServletRequest httpServletRequest, Locale locale) {
+		// 현재 pdf 파일들을 노출시킨다.
+		return "imagefolder";
+	}
+
+	@RequestMapping(value = "/pdfviewer", method = RequestMethod.GET)
+	public String pdfviewer(HttpServletRequest httpServletRequest, Locale locale) {
+		// 현재 파일명을 받아 pdf를 보여준다.
+		//경로만 내려보내면 됨
+		return "pdfviewer";
+	}
+
+	@GetMapping(value = "/pdf/**")
+	public @ResponseBody ResponseEntity<byte[]> getPdfFile(HttpServletRequest httpServletRequest) throws IOException {
+		String filePathName = (String) httpServletRequest
+				.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		StringBuilder resourcePath = new StringBuilder();
+		resourcePath.append(basePath).append(filePathName);
+		HttpHeaders header = new HttpHeaders();
+		header.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE);
 
 		return new ResponseEntity<byte[]>(IOUtils.toByteArray(new FileInputStream(new File(resourcePath.toString()))),
 				header, HttpStatus.CREATED);
