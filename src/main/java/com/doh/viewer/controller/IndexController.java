@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Iterator;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,6 +33,9 @@ public class IndexController {
 	@Value("${viewer.base.path}")
 	private String basePath;
 
+	@Value("${viewer.pdf.path}")
+	private String pdfBasePath;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(HttpServletRequest httpServletRequest, Locale locale) {
 		return "index";
@@ -82,9 +87,18 @@ public class IndexController {
 	}
 
 	@RequestMapping(value = "/pdfviewer", method = RequestMethod.GET)
-	public String pdfviewer(HttpServletRequest httpServletRequest, Locale locale) {
-		// 현재 파일명을 받아 pdf를 보여준다.
-		//경로만 내려보내면 됨
+	public String pdfviewer(Model model, Locale locale) {
+		File dir = new File(pdfBasePath);
+		File files[] = dir.listFiles();
+		String[] fileArray = new String[dir.listFiles().length];
+		
+		for (int i = 0; i < files.length; i++) {
+			File file = files[i];
+			fileArray[i] = file.getName();
+			logger.info("file.getName() : " + file.getName());
+		}
+		
+		model.addAttribute("fileArray", fileArray);
 		return "pdfviewer";
 	}
 
