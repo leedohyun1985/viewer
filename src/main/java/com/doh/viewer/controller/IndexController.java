@@ -3,8 +3,6 @@ package com.doh.viewer.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Iterator;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +39,7 @@ public class IndexController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/imagefolder", method = RequestMethod.GET)
+	@RequestMapping(value = "/image-folder-list", method = RequestMethod.GET)
 	public String imagefolder(HttpServletRequest httpServletRequest, Locale locale) {
 		// 현재 이미지 폴더들을 내려보낸다.
 		return "imagefolder";
@@ -86,7 +84,7 @@ public class IndexController {
 		return "imagefolder";
 	}
 
-	@RequestMapping(value = "/pdfviewer", method = RequestMethod.GET)
+	@RequestMapping(value = "/pdf-file-list", method = RequestMethod.GET)
 	public String pdfviewer(Model model, Locale locale) {
 		File dir = new File(pdfBasePath);
 		File files[] = dir.listFiles();
@@ -95,10 +93,7 @@ public class IndexController {
 		for (int i = 0; i < files.length; i++) {
 			File file = files[i];
 			fileArray[i] = file.getName();
-			logger.info("file.getName() : " + file.getName());
 		}
-		
-		model.addAttribute("fileArray", fileArray);
 		return "pdfviewer";
 	}
 
