@@ -81,7 +81,7 @@ public class IndexController {
 	@RequestMapping(value = "/pdffolder", method = RequestMethod.GET)
 	public String pdffolder(HttpServletRequest httpServletRequest, Locale locale) {
 		// 현재 pdf 파일들을 노출시킨다.
-		return "imagefolder";
+		return "pdffolder";
 	}
 
 	@RequestMapping(value = "/pdf-file-list", method = RequestMethod.GET)
