@@ -94,6 +94,7 @@ public class IndexController {
 			File file = files[i];
 			fileArray[i] = file.getName();
 		}
+		model.addAttribute("fileArray", fileArray);
 		return "pdfviewer";
 	}
 
