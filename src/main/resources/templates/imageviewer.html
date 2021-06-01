@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="Dohyun's Lab">
 <meta name="author" content="leedohyun">
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}" />
 <meta charset="UTF-8">
 <title>뷰어 페이지</title>
 <!-- Bootstrap core CSS -->
@@ -40,7 +40,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>Viewer with custom title</h1>
+<!--     <h1>Viewer with custom title</h1> -->
     <div id="galley">
       <ul class="pictures">
 		<li><img th:attr="data-original=@{/image/빅데이터분석기사필기/001.png}" th:src="@{/image/빅데이터분석기사필기/001.png}"/></li>
