@@ -41,12 +41,10 @@
 <body>
   <div class="container">
 <!--     <h1>Viewer with custom title</h1> -->
-    <div id="galley">
-      <ul class="pictures">
-		<li><img th:attr="data-original=@{/image/빅데이터분석기사필기/001.png}" th:src="@{/image/빅데이터분석기사필기/001.png}"/></li>
-		<li><img th:attr="data-original=@{/image/빅데이터분석기사필기/002.png}" th:src="@{/image/빅데이터분석기사필기/002.png}"/></li>
-		<li><img th:attr="data-original=@{/image/빅데이터분석기사필기/003.png}" th:src="@{/image/빅데이터분석기사필기/003.png}"/></li>
-      </ul>
+    <div id="pictures">
+    <ul class="list-group" th:each="file : ${fileArray}">
+  		<li><img th:attr="data-original=@{${file}}" th:src="@{${file}}"/></li>
+	</ul>
     </div>
   </div>
 

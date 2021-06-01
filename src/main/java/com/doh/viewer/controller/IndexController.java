@@ -34,6 +34,9 @@ public class IndexController {
 	@Value("${viewer.pdf.path}")
 	private String pdfBasePath;
 	
+	@Value("${viewer.image.path}")
+	private String imageBasePath;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(HttpServletRequest httpServletRequest, Locale locale) {
 		return "index";
@@ -46,8 +49,18 @@ public class IndexController {
 	}
 
 	@RequestMapping(value = "/imageviewer", method = RequestMethod.GET)
-	public String imageviewer(HttpServletRequest httpServletRequest, Locale locale) {
+	public String imageviewer(Model model, HttpServletRequest httpServletRequest, Locale locale) {
 		// 현재 이미지 폴더값을 가져와서 내부에 있는 이미지 파일명을 전체다 내려보내야함
+		String tempPath = "/정보보안기사";
+		File dir = new File(imageBasePath + tempPath);
+		File files[] = dir.listFiles();
+		String[] fileArray = new String[dir.listFiles().length];
+		
+		for (int i = 0; i < files.length; i++) {
+			File file = files[i];
+			fileArray[i] = file.getName();
+		}
+		model.addAttribute("fileArray", fileArray);
 		return "imageviewer";
 	}
 
