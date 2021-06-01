@@ -43,7 +43,7 @@
 <!--     <h1>Viewer with custom title</h1> -->
     <div id="pictures">
     <ul class="list-group" th:each="file : ${fileArray}">
-  		<li><img th:attr="data-original=@{${file}}" th:src="@{${file}}"/></li>
+  		<li><img th:attr="data-original=@{'image/' + ${file}}" th:src="@{'image/' + ${file}}"/></li>
 	</ul>
     </div>
   </div>
