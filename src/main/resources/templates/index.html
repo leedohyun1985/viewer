@@ -1,13 +1,93 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Dohyun's Lab">
+<meta name="author" content="leedohyun">
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <meta charset="UTF-8">
-<title>Viewer Page</title>
+<title>뷰어 페이지</title>
+<!-- Bootstrap core CSS -->
+<link th:href="@{/bootstrap-5.0.1-dist/css/bootstrap.min.css}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 <body>
-이미지나 PDF를 보기 위해 만든 페이지
-<a th:href="@{/imageviewer}">Image 뷰어</a>
-<a th:href="@{/pdf-file-list}">PDF 뷰어</a>
+	<main>
+		<div class="container py-4">
+			<header class="pb-3 mb-4 border-bottom">
+				<a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+					<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-hash" viewBox="0 0 16 16">
+					  <path d="M8.39 12.648a1.32 1.32 0 0 0-.015.18c0 .305.21.508.5.508.266 0 .492-.172.555-.477l.554-2.703h1.204c.421 0 .617-.234.617-.547 0-.312-.188-.53-.617-.53h-.985l.516-2.524h1.265c.43 0 .618-.227.618-.547 0-.313-.188-.524-.618-.524h-1.046l.476-2.304a1.06 1.06 0 0 0 .016-.164.51.51 0 0 0-.516-.516.54.54 0 0 0-.539.43l-.523 2.554H7.617l.477-2.304c.008-.04.015-.118.015-.164a.512.512 0 0 0-.523-.516.539.539 0 0 0-.531.43L6.53 5.484H5.414c-.43 0-.617.22-.617.532 0 .312.187.539.617.539h.906l-.515 2.523H4.609c-.421 0-.609.219-.609.531 0 .313.188.547.61.547h.976l-.516 2.492c-.008.04-.015.125-.015.18 0 .305.21.508.5.508.265 0 .492-.172.554-.477l.555-2.703h2.242l-.515 2.492zm-1-6.109h2.266l-.515 2.563H6.859l.532-2.563z"/>
+					</svg>
+					<span class="fs-4">이도현의 연구실</span>
+				</a>
+			</header>
 
+			<div class="p-5 mb-4 bg-light rounded-3">
+				<div class="container-fluid py-5">
+					<h1 class="display-5 fw-bold">What You See Is What You Get.</h1>
+					<p class="col-md-8 fs-4">
+					이미지와 PDF 파일을 보기 위한 페이지
+					</p>
+				</div>
+			</div>
+
+			<div class="row align-items-md-stretch">
+				<div class="col-md-6">
+					<div class="h-100 p-5 text-white bg-dark rounded-3">
+						<h2><i class="bi bi-file-earmark-person"></i> PDF 뷰어</h2>
+						<p>
+						PDF Viewer 페이지
+						<br>
+						사실상 뷰어 기능은 브라우저에 의존하고 있으며
+						<br>
+						실제로는 PDF파일을 다운로드하는 기능입니다.
+						<br>
+						크롬, 엣지, 오페라에서는 정상 동작함을 확인하였습니다.
+						</p>
+						<button class="btn btn-outline-light" type="button" th:onclick="'location.href=\''+ @{/pdf-file-list} + '\''">바로가기</button>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<div class="h-100 p-5 bg-light border rounded-3">
+						<h2><i class="bi bi-file-earmark-pdf-fill"></i> Image 뷰어</h2>
+						<p>
+						Image Viewer 페이지
+						<br>
+						Viewer.js 라는 오픈소스를 활용하여 이미지 뷰어 기능을 구현하였습니다.
+						<br>
+						Viewer.js의 주소는 다음과 같습니다.
+						<br>
+						<i class="bi bi-globe2"></i> <a href="https://fengyuanchen.github.io/viewerjs/">https://fengyuanchen.github.io/viewerjs/</a>
+						</p>
+						<button class="btn btn-outline-secondary" type="button" th:onclick="'location.href=\''+ @{/imageviewer} + '\''">바로가기</button>
+					</div>
+				</div>
+				<!-- 
+				<div class="col-md-6">
+					<div class="h-100 p-5 bg-light border rounded-3">
+						<h2>Add borders</h2>
+						<p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure to look under the hood at the
+							source HTML here as we've adjusted the alignment and sizing of both column's content for equal-height.</p>
+						<button class="btn btn-outline-secondary" type="button">Example button</button>
+					</div>
+				</div>
+				
+				<div class="col-md-6">
+					<div class="h-100 p-5 text-white bg-dark rounded-3">
+						<h2>Change the background</h2>
+						<p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then, mix and match with additional
+							component themes and more.</p>
+						<button class="btn btn-outline-light" type="button">Example button</button>
+					</div>
+				</div>
+				 -->
+			</div>
+
+			<footer class="pt-3 mt-4 text-muted border-top"> &copy; 2021 leedohyun</footer>
+		</div>
+	</main>
 </body>
 </html>
