@@ -14,53 +14,55 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <link rel="stylesheet" href="https://unpkg.com/bootstrap@4/dist/css/bootstrap.min.css" crossorigin="anonymous">
 
-  <link rel="stylesheet" th:href="@{/viewer.js/viewer.css}">
-  <style>
-    .pictures {
-      list-style: none;
-      margin: 0;
-      max-width: 30rem;
-      padding: 0;
-    }
+<link rel="stylesheet" th:href="@{/viewer.js/viewer.css}">
+<style>
+.pictures {
+	list-style: none;
+	margin: 0;
+	max-width: 30rem;
+	padding: 0;
+}
 
-    .pictures > li {
-      border: 1px solid transparent;
-      float: left;
-      height: calc(100% / 3);
-      margin: 0 -1px -1px 0;
-      overflow: hidden;
-      width: calc(100% / 3);
-    }
+.pictures>li {
+	border: 1px solid transparent;
+	float: left;
+	height: calc(100%/ 3);
+	margin: 0 -1px -1px 0;
+	overflow: hidden;
+	width: calc(100%/ 3);
+}
 
-    .pictures > li > img {
-      cursor: zoom-in;
-      width: 100%;
-    }
-  </style>
+.pictures>li>img {
+	cursor: zoom-in;
+	width: 100%;
+}
+</style>
 </head>
 <body>
-  <div class="container">
-<!--     <h1>Viewer with custom title</h1> -->
-    <div id="pictures">
-    <ul class="list-group" th:each="file : ${fileArray}">
-  		<li><img th:attr="data-original=@{'image/' + ${file}}" th:src="@{'image/' + ${file}}"/></li>
-	</ul>
-    </div>
-  </div>
-
-  <script src="https://unpkg.com/jquery@3/dist/jquery.slim.min.js" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/bootstrap@4/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-  <script th:src="@{/viewer.js/viewer.js}"></script>
-  <script>
-    window.addEventListener('DOMContentLoaded', function () {
-      var galley = document.getElementById('galley');
-      var viewer = new Viewer(galley, {
-        url: 'data-original',
-        title: function (image) {
-          return image.alt + ' (' + (this.index + 1) + '/' + this.length + ')';
-        },
-      });
-    });
-  </script>
+	<div class="container">
+		<!--     <h1>Viewer with custom title</h1> -->
+		<div id="galley">
+			<div id="pictures">
+				<ul class="list-group" th:each="file : ${fileArray}">
+					<li><img th:attr="data-original=@{'image/' + ${file}}" th:src="@{'image/' + ${file}}" /></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<script src="https://unpkg.com/jquery@3/dist/jquery.slim.min.js" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/bootstrap@4/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<script th:src="@{/viewer.js/viewer.js}"></script>
+	<script>
+		window.addEventListener('DOMContentLoaded', function() {
+			var galley = document.getElementById('galley');
+			var viewer = new Viewer(galley, {
+				url : 'data-original',
+				title : function(image) {
+					return image.alt + ' (' + (this.index + 1) + '/'
+							+ this.length + ')';
+				},
+			});
+		});
+	</script>
 </body>
 </html>
