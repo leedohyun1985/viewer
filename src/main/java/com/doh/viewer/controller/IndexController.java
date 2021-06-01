@@ -58,7 +58,7 @@ public class IndexController {
 		
 		for (int i = 0; i < files.length; i++) {
 			File file = files[i];
-			fileArray[i] = file.getName();
+			fileArray[i] = imageBasePath + tempPath + file.getName();
 		}
 		model.addAttribute("fileArray", fileArray);
 		return "imageviewer";
