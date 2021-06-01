@@ -51,7 +51,7 @@ public class IndexController {
 	@RequestMapping(value = "/imageviewer", method = RequestMethod.GET)
 	public String imageviewer(Model model, HttpServletRequest httpServletRequest, Locale locale) {
 		// 현재 이미지 폴더값을 가져와서 내부에 있는 이미지 파일명을 전체다 내려보내야함
-		String tempPath = "/정보보안기사";
+		String tempPath = "/빅데이터분석기사필기";
 		File dir = new File(imageBasePath + tempPath);
 		File files[] = dir.listFiles();
 		String[] fileArray = new String[dir.listFiles().length];
