@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="Dohyun's Lab">
 <meta name="author" content="leedohyun">
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -12,7 +13,8 @@
 <link th:href="@{/bootstrap-5.0.1-dist/css/bootstrap.min.css}" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <link rel="stylesheet" href="https://unpkg.com/bootstrap@4/dist/css/bootstrap.min.css" crossorigin="anonymous">
-<link th:href="@{/viewer.js/viewer.css}" rel="stylesheet">
+
+  <link rel="stylesheet" href="/viewer.js/viewer.css">
   <style>
     .pictures {
       list-style: none;
@@ -35,22 +37,32 @@
       width: 100%;
     }
   </style>
-
 </head>
 <body>
-	<div class="container">
-		<div>
-			<ul id="images">
-				<li><img th:src="@{/image/빅데이터분석기사필기/001.png}"/></li>
-				<li><img th:src="@{/image/빅데이터분석기사필기/002.png}"/></li>
-				<li><img th:src="@{/image/빅데이터분석기사필기/003.png}"/></li>
-			</ul>
-		</div>
-	</div>
+  <div class="container">
+    <h1>Viewer with custom title</h1>
+    <div id="galley">
+      <ul class="pictures">
+		<li><img th:attr="data-original=@{/image/빅데이터분석기사필기/001.png}" th:src="@{/image/빅데이터분석기사필기/001.png}"/></li>
+		<li><img th:attr="data-original=@{/image/빅데이터분석기사필기/002.png}" th:src="@{/image/빅데이터분석기사필기/002.png}"/></li>
+		<li><img th:attr="data-original=@{/image/빅데이터분석기사필기/003.png}" th:src="@{/image/빅데이터분석기사필기/003.png}"/></li>
+      </ul>
+    </div>
+  </div>
+
   <script src="https://unpkg.com/jquery@3/dist/jquery.slim.min.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/bootstrap@4/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-  <script th:src="@{/viewer.js/viewer.js}"></script>
-	<script type="text/javascript">
-	const gallery = new Viewer(document.getElementById('images'));
-	</script>
+  <script src="/viewer.js/viewer.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      var galley = document.getElementById('galley');
+      var viewer = new Viewer(galley, {
+        url: 'data-original',
+        title: function (image) {
+          return image.alt + ' (' + (this.index + 1) + '/' + this.length + ')';
+        },
+      });
+    });
+  </script>
+</body>
 </html>
